@@ -1,0 +1,60 @@
+<body>
+</body>
+<script type="text/javascript">
+
+let canv,ctx;
+
+
+function sine(x,amp,waveLength) {
+  return Math.sin(x / waveLength) * amp;
+}
+
+function saw(x,amp,waveLength) {
+  return ((x / waveLength) % 1) * (-amp);
+}
+
+function triangle(x,amp,waveLength) {
+  x = (x / waveLength) % 1;
+  return (x < .5 ? x : (1 - x)) * (-amp);
+}
+
+function square(x,amp,waveLength) {
+  x = (x / waveLength) % 1;
+  return (x < .5 ? 0 : 1) * (-amp);
+}
+
+
+function main() {
+  canv =  document.createElement('canvas');
+  ctx = canv.getContext('2d');
+  canv.width = 600;
+  canv.height = 600;
+  canv.style.backgroundColor = 'black';
+  document.body.appendChild(canv);
+  let loop = function(){
+    logic();
+    draw();
+    requestAnimationFrame(loop);
+  }
+  init();
+  loop();
+}
+
+function init() {
+
+}
+
+function logic() {
+
+}
+
+function draw() {
+  for(let i = 0;i < 2000;i+= .01) {
+    ctx.fillRect(i,triangle(saw(i,60,50),40,20) + canv.height / 2,1,1);
+  }
+  ctx.fillStyle = 'green';
+  ctx.fill();
+}
+
+main();
+</script>
